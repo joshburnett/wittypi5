@@ -22,7 +22,30 @@ Python module for reading and writing Witty Pi 5 HAT+ registers via I2C on Raspb
 ```python
 from wittypi5 import ActionReason, Register, WittyPi5
 
-# Context manager (recommended)
+wp5 = WittyPi5()
+wp5.open()
+# Status readings
+print(f"Firmware: {wp5.firmware_version}")
+print(f"V_USB: {wp5.v_usb} V, V_IN: {wp5.v_in} V")
+print(f"Last startup: {wp5.action_reason_startup.name}")
+print(f"Last shutdown: {wp5.action_reason_shutdown.name}")
+
+# RTC and temperature
+print(f"RTC: {wp5.datetime}")
+print(f"Temperature: {wp5.temp_c}°C ({wp5.temp_f}°F)")
+
+# Sync RTC with system time
+wp5.sync_rtc_with_local()
+
+# Raw register access
+state = wp5.read_register(Register.RASPBERRY_PI_STATE)
+
+# Config (read/write)
+wp5.config_led_on_time = 100  # LED on for 100 ms
+wp5.close()
+
+
+# Or, with context manager
 with WittyPi5() as wp5:
     # Status readings
     print(f"Firmware: {wp5.firmware_version}")
