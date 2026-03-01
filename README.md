@@ -5,12 +5,16 @@ Python module for reading and writing Witty Pi 5 HAT+ registers via I2C on Raspb
 ## Setup
 
 1. Enable I2C on your Raspberry Pi (`raspi-config` → Interface Options → I2C).
-2. Install dependencies:
+2. Install from PyPI:
 
    ```bash
-   uv pip install -e .
-   # or
-   uv pip install smbus2
+   uv pip install wittypi5
+   ```
+
+   Or with pip:
+
+   ```bash
+   pip install wittypi5
    ```
 
 ## Usage
